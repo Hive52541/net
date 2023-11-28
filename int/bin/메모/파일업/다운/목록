@@ -1,0 +1,22 @@
+파일 다운로드 요청
+
+[Command.REQ_DOWNLOAD][doc.pdf]
+//다운로드할 파일명 조회
+String filename = in.readUTF();
+
+//파일 다운로드 처리
+[RES_FILE][파일명][사이즈][xxxxxxxxxxxxxxdxxx]
+File file = new File("c:repo/" +filename);
+long size = file.length();
+
+out.writeInt(Command.RES_FILE);
+out.writeUTF(filename);
+out.writeLong(size);
+
+FileInputStream fis = new FileInputStream(file);
+int len = 0;
+byte[] buf = new byte[1024];
+while((len = fis.read(buf))!= -1) {
+    out.write(buf,0,len);
+}
+fis.close();

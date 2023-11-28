@@ -6,10 +6,14 @@ import java.io.IOException;
 
 public class ServerFileUploadHandler implements Handler {
 
-    @Override
-    public void handle(DataInputStream in, DataOutputStream out) throws IOException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'handle'");
-    }
+  @Override
+  public void handle(DataInputStream in, DataOutputStream out)
+    throws IOException {
+    // TODO Auto-generated method stub
 
+    System.out.println("### 파일서버에게 파일업로드를 요청함...");
+
+    out.writeInt(Cmd.REQ_UPLOAD);
+   
+  }
 }

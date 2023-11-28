@@ -16,10 +16,10 @@ public class Client {
   private DataOutputStream out;
 
   public Client() {
-    //Map 객체에 메뉴별 핸들러객체를 저장한다.
+    //Map 객체에 메뉴별 핸들러객체를
     map.put(Cmd.MENU_LIST, new ClientFileListHandler());
-    map.put(Cmd.MENU_DOWNLOAD, new ClientFileDownloadHandler());
-    map.put(Cmd.MENU_UPLOAD, new ClientFileDownloadHandler());
+    map.put(Cmd.MENU_DOWNLOAD, new ClientFileDownloadHandler(scanner));
+    map.put(Cmd.MENU_UPLOAD, new ClientFileDownloadHandler(scanner));
     map.put(Cmd.MENU_EXIT, new ClientExitHandler());
   }
 

@@ -9,7 +9,7 @@ public class ServerFileListHandler implements  Handler {
     @Override
     public void handle(DataInputStream in, DataOutputStream out) throws IOException {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'handle'");
+       
     }
 
 }

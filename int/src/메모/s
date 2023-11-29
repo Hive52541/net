@@ -1,0 +1,47 @@
+public class Server {
+
+  Map<Integer, Handler> map = new HashMap<>();
+
+  public Server() {
+    map.put(REQ_FILE_LIST, new ServerFileListHandler());
+    map.put(REQ_DOWNLOAD, new ServerFileDownloadHandler());
+    map.put(REQ_UPLOAD, new ServerFileUploadHandler());
+  }
+
+  public void startup() {
+    ServerSocket serverSocket = new ServerSocket(30000);
+    while (true) {
+      Socket socket = serverSocket.accept();
+
+      ServerThread thread = new ServerThread(map, socket);
+      thread.start();
+    }
+  }
+}
+
+public class ServerThread extends Thread {
+
+  Map<Integer, Handler> map;
+  Socket socket;
+
+  DataInputStream in;
+  DataOutputStream out;
+
+  public ServerThread(Map<Integer, Handler> map, Socket socket) {
+    this.map = map;
+    this.socket = socket;
+
+    in = new DataInputStream(socket.getInputStream());
+    out = new DataOutputStream(socket.getOutputStream());
+  }
+
+  //스레드가 수행할 작업을 작성한다
+  public void run() {
+    while (true) {
+      //클라이언트가 요청한 요청명령 조회하기
+      int reqCmd = in.readInt();
+      Handler h = map.get(reqCmd);
+      h.handle(in, out);
+    }
+  }
+}

@@ -42,6 +42,7 @@ public class ClientFileDownloadHandler implements Handler {
       );
       FileOutputStream fos = new FileOutputStream(file);
 
+      
       long readBytes = 0;
       int len = 0;
       byte[] buf = new byte[1024];
